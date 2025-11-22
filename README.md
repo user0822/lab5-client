@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# Task Manager Client (Lab 5) 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##  Опис проєкту
+Це клієнтська частина системи управління завданнями (Frontend).
+Застосунок реалізує повний цикл взаємодії з Backend API: автентифікацію користувачів, захист маршрутів, управління станом та створення завдань.
 
-Currently, two official plugins are available:
+## Функціональність
+-  **Аутентифікація:** Вхід у систему та вихід (Logout) з використанням JWT.
+-  **Protected Routes:** Захист сторінок (Dashboard недоступний без логіну).
+-  **Робота з формами:** Валідація даних (Zod) та обробка форм (React Hook Form).
+-  **Управління станом:** Глобальний стейт користувача через Zustand.
+-  **Сповіщення:** Toast-повідомлення про успішні дії або помилки.
+-  **UI/UX:** Адаптивний інтерфейс на Tailwind CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Технології
+- **Core:** React 18, TypeScript, Vite
+- **State Management:** Zustand
+- **Forms & Validation:** React Hook Form, Zod
+- **Network:** Axios (з Interceptors)
+- **UI & Styling:** Tailwind CSS, Lucide React (іконки)
+- **Notifications:** React Hot Toast
 
-## React Compiler
+##  API Endpoints
+Фронтенд взаємодіє з розгорнутим бекендом на Render (`https://task-manager-api-o8is.onrender.com/api`):
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `POST /auth/login` — Авторизація користувача.
+- `POST /tasks` — Створення нового завдання.
 
-## Expanding the ESLint configuration
+##  Встановлення та запуск
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Вимоги
+- Node.js 18+
+- npm
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Інструкції
+```bash
+# Клонування репозиторію
+git clone [https://github.com/user0822/lab5-client.git](https://github.com/user0822/lab5-client.git)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Перехід у папку
+cd lab5-client
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+# Встановлення залежностей
+npm install
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# Запуск у режимі розробки
+npm run dev.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# Структура проєкту
+src/
+├── components/
+│   ├── common/        # Базові UI (Button, Input, Card)
+│   ├── layout/        # Header, Footer
+│   └── ProtectedRoute.tsx # Компонент захисту сторінок
+├── pages/             # Сторінки (Login, Dashboard, Home)
+├── services/          # Налаштування Axios (api.ts)
+├── stores/            # Zustand store (authStore.ts)
+├── schemas/           # Схеми валідації Zod
+├── types/             # TypeScript інтерфейси
+└── utils/             # Допоміжні функції
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+# Тестові дані для входу
+Email: final@test.com
+Password: password123
+
+# Автор
+Вадим Венський, група ІПЗ-41
